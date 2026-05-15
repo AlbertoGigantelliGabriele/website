@@ -199,33 +199,35 @@
         <!-- Hero Section -->
         <section class="snap-section lg:h-[calc(100vh-72px)] grid grid-cols-1 lg:grid-cols-2 relative">
 
-            <!-- Left Side (Text) -->
-            <div class="relative flex flex-col justify-center px-0 md:px-16 py-12 border-b lg:border-b-0 lg:border-r fine-border-r fine-border-b bg-surface dark:bg-dark-bg transition-colors h-full">
-                <div class="relative z-10 max-w-2xl">
+<!-- Left Side (Text) -->
+            <div class="relative flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 lg:py-12 border-b lg:border-b-0 lg:border-r fine-border-r fine-border-b bg-surface dark:bg-dark-bg transition-colors h-full">
+                <div class="relative z-10 max-w-2xl mx-auto lg:mx-0 w-full">
                     <div class="flex items-center gap-3 mb-8">
                         <div class="w-8 h-[1px] bg-brass"></div>
                         <span class="font-mono text-xs tracking-[0.2em] uppercase text-brass" data-i18n="hero_label">Strategic Intelligence · Applied AI</span>
                     </div>
 
-                    <h1 class="font-serif text-[56px] md:text-[80px] leading-[1.05] font-light tracking-tight text-on-surface dark:text-dark-text mb-8 transition-colors" data-i18n="hero_title">
+                    <h1 class="font-serif text-[48px] sm:text-[56px] md:text-[80px] leading-[1.05] font-light tracking-tight text-on-surface dark:text-dark-text mb-8 transition-colors" data-i18n="hero_title">
                         Solutions that<br><em class="italic text-primary dark:text-dark-primary">truly solve.</em>
                     </h1>
 
-                    <p class="font-sans text-lg leading-relaxed text-on-surface-variant dark:text-dark-text-muted max-w-md mb-12 transition-colors" data-i18n="hero_sub">
+                    <p class="font-sans text-base sm:text-lg leading-relaxed text-on-surface-variant dark:text-dark-text-muted max-w-md mb-12 transition-colors" data-i18n="hero_sub">
                         We don't implement technology for the sake of it. We design strategic intelligence architectures that amplify decision-making capabilities, optimize complex processes, and generate measurable impact.
                     </p>
 
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-4 sm:gap-6 w-full">
                         <a href="#contact" class="bg-primary dark:bg-dark-primary-container text-white font-mono text-xs tracking-[0.15em] uppercase px-8 py-4 hover:bg-[#122a1b] dark:hover:bg-[#5f876e] transition-colors w-full sm:w-auto text-center" data-i18n="hero_cta1">Contact Us</a>
-                        <a href="#approach" class="font-mono text-xs tracking-[0.15em] uppercase text-on-surface-variant dark:text-dark-text-muted hover:text-primary dark:hover:text-dark-primary flex items-center gap-2 group transition" data-i18n="hero_cta2">
+
+                        <!-- Su mobile diventa un bottone con bordo, su PC torna testo normale con freccia -->
+                        <a href="#approach" class="font-mono text-xs tracking-[0.15em] uppercase text-on-surface-variant dark:text-dark-text-muted hover:text-primary dark:hover:text-dark-primary flex items-center justify-center gap-2 group transition border fine-border sm:border-transparent py-4 sm:py-4 px-8 w-full sm:w-auto text-center" data-i18n="hero_cta2">
                             Discover the Method <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </a>
                     </div>
 
                     <!-- Live Training Ticker -->
-                    <div class="flex items-center gap-3 mt-16 p-3 bg-white dark:bg-dark-surface border fine-border w-fit shadow-sm transition-colors">
-                        <div class="w-2 h-2 rounded-full bg-primary dark:bg-dark-primary animate-pulse-fast"></div>
-                        <span id="live-ticker" class="font-mono text-[11px] tracking-[0.1em] text-on-surface-variant dark:text-dark-text-muted uppercase"></span>
+                    <div class="flex flex-wrap items-center gap-2 sm:gap-3 mt-12 sm:mt-16 p-3 bg-white dark:bg-dark-surface border fine-border w-full sm:w-fit shadow-sm transition-colors overflow-hidden">
+                        <div class="w-2 h-2 shrink-0 rounded-full bg-primary dark:bg-dark-primary animate-pulse-fast"></div>
+                        <span id="live-ticker" class="font-mono text-[9px] sm:text-[11px] tracking-[0.05em] sm:tracking-[0.1em] text-on-surface-variant dark:text-dark-text-muted uppercase truncate sm:whitespace-nowrap"></span>
                     </div>
                 </div>
             </div>
@@ -291,7 +293,7 @@
         </section>
 
         <!-- Approach Section -->
-        <section id="approach" class="snap-section lg:h-[calc(100vh-72px)] px-0 md:px-16 border-b fine-border-b bg-surface-container-low dark:bg-dark-bg flex flex-col justify-center transition-colors">
+        <section id="approach" class="snap-section lg:h-[calc(100vh-72px)] px-6 md:px-12 lg:px-16 py-20 lg:py-0 border-b fine-border-b bg-surface-container-low dark:bg-dark-bg flex flex-col justify-center transition-colors">
             <div class="max-w-7xl mx-auto w-full">
                 <div class="flex items-center gap-4 mb-10">
                     <h2 class="font-serif text-3xl md:text-5xl text-primary-container dark:text-dark-primary transition-colors" data-i18n="approach_title">Approach</h2>
@@ -350,11 +352,15 @@
         </section>
 
         <!-- Services Section -->
-        <section id="services" class="snap-section lg:h-[calc(100vh-72px)] px-0 md:px-16 border-b fine-border-b bg-surface dark:bg-dark-bg flex flex-col justify-center transition-colors">
+        <!-- Services Section -->
+        <section id="services" class="snap-section lg:h-[calc(100vh-72px)] px-6 md:px-12 lg:px-16 py-20 lg:py-0 border-b fine-border-b bg-surface dark:bg-dark-bg flex flex-col justify-center transition-colors">
             <div class="max-w-7xl mx-auto w-full">
                 <div class="flex items-center gap-4 mb-10">
                     <h2 class="font-serif text-3xl md:text-5xl text-primary-container dark:text-dark-primary transition-colors" data-i18n="services_title">Services</h2>
                 </div>
+
+                <!-- Modificato il gap da gap-8 a gap-4 md:gap-6 lg:gap-8 -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <!-- Serv 1 -->
@@ -403,7 +409,7 @@
         </section>
 
         <!-- Manifesto Section -->
-        <section id="manifesto" class="snap-section lg:h-[calc(100vh-72px)] px-0 md:px-16 bg-brand-dark relative overflow-hidden flex justify-center items-center transition-colors">
+        <section id="manifesto" class="snap-section lg:h-[calc(100vh-72px)] px-6 md:px-12 lg:px-16 py-24 lg:py-0 bg-brand-dark relative overflow-hidden flex justify-center items-center transition-colors">
 
             <!-- Canvas Rete Neurale visibile il giusto -->
             <div class="absolute inset-0 z-0 opacity-70">
@@ -422,9 +428,8 @@
             </div>
         </section>
 
-        <!-- Contact Section with Logos Compressa -->
         <!-- Contact Section (carosello + form avanzato) -->
-        <section id="contact" class="snap-section lg:min-h-[calc(100vh-72px)] px-0 md:px-16 bg-surface-container-low dark:bg-dark-bg border-b fine-border-b flex flex-col justify-start transition-colors">
+        <section id="contact" class="snap-section lg:min-h-[calc(100vh-72px)] px-6 md:px-12 lg:px-16 py-20 bg-surface-container-low dark:bg-dark-bg border-b fine-border-b flex flex-col justify-start transition-colors">
 
             <div class="max-w-7xl mx-auto w-full">
                 <!-- Tech Ecosystem Carousel -->
@@ -609,7 +614,7 @@
             </div>
         </section>
         <!-- Footer -->
-        <footer class="snap-section bg-surface dark:bg-dark-bg text-on-surface dark:text-dark-text py-10 px-0 md:px-16 border-t fine-border-t transition-colors relative z-10">
+        <footer class="snap-section bg-surface dark:bg-dark-bg text-on-surface dark:text-dark-text py-10 px-6 md:px-12 lg:px-16 border-t fine-border-t transition-colors relative z-10">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="font-serif text-lg tracking-[0.15em] font-light">
                     S.O.I.A. <span class="text-brass italic">Consulting</span>
@@ -979,9 +984,9 @@
             tickerEl.innerHTML = `
                 <span class="text-primary dark:text-dark-primary font-bold">[${prefix}]</span>
                 EPOCH: ${epoch}
-                <span class="mx-2 opacity-30">|</span>
+                <span class="mx-1 sm:mx-2 opacity-30">|</span>
                 LOSS: ${loss.toFixed(4)} <span class="text-brass font-bold">↓</span>
-                <span class="mx-2 opacity-30">|</span>
+                <span class="mx-1 sm:mx-2 opacity-30">|</span>
                 STATUS: ${status}
             `;
         }
@@ -1026,7 +1031,7 @@
             animateNeural();
             cloneLogos();
         });
-        
+
         // --- 8. Gestione Invio Google Forms (Sicuro & Fixato) ---
         const contactForm = document.getElementById('contactForm');
         const submitBtn = contactForm.querySelector('button[type="submit"]');
