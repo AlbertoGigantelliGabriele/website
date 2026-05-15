@@ -550,15 +550,19 @@
 
                     <!-- Form arricchito (più campi) -->
                     <div class="bg-white dark:bg-dark-surface p-6 md:p-8 border fine-border shadow-sm transition-colors">
-                        <form class="space-y-5" onsubmit="event.preventDefault();">
+                        <form id="contactForm" class="space-y-5">
+                            <div class="hidden" aria-hidden="true">
+                                <label for="bot-check">Do not fill in this field if you are human</label>
+                                <input type="text" id="bot-check" name="bot-check" tabindex="-1" autocomplete="off">
+                            </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div class="flex flex-col">
                                     <label for="name" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_name">Full Name</label>
-                                    <input type="text" id="name" data-i18n-placeholder="ph_name" placeholder="e.g. John Doe" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
+                                    <input type="text" id="name" required data-i18n-placeholder="ph_name" placeholder="e.g. John Doe" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
                                 </div>
                                 <div class="flex flex-col">
                                     <label for="company" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_company">Company</label>
-                                    <input type="text" id="company" data-i18n-placeholder="ph_company" placeholder="e.g. Acme Corp" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
+                                    <input type="text" id="company" required data-i18n-placeholder="ph_company" placeholder="e.g. Acme Corp" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
                                 </div>
                             </div>
 
@@ -576,7 +580,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div class="flex flex-col">
                                     <label for="email" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_email">Professional Email</label>
-                                    <input type="email" id="email" data-i18n-placeholder="ph_email" placeholder="name@company.com" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
+                                    <input type="email" id="email" required data-i18n-placeholder="ph_email" placeholder="name@company.com" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
                                 </div>
                                 <div class="flex flex-col">
                                     <label for="need" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_need">Specific Need</label>
@@ -1022,7 +1026,95 @@
             animateNeural();
             cloneLogos();
         });
+        // --- 8. Gestione Invio Google Forms (Sicuro) ---
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
 
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Salviamo il testo originale una sola volta
+            const originalText = submitBtn.innerText;
+
+            // 0. CONTROLLO ANTI-SPAM (Honeypot)
+            const honeypot = document.getElementById('bot-check').value;
+            if (honeypot !== "") {
+                // È un bot! Fingiamo che sia andato tutto a buon fine ma non inviamo nulla.
+                console.warn("Spam bot rilevato e bloccato.");
+                showSuccessMessage(originalText);
+                return;
+            }
+
+            // 0. CONTROLLO ANTI-FLOOD (Elegante, integrato nel bottone)
+            const lastSubmitTime = localStorage.getItem('soia_last_submit');
+            if (lastSubmitTime && (Date.now() - parseInt(lastSubmitTime)) < 60000) {
+                // Avviso visivo nel bottone invece dell'alert fastidioso
+                submitBtn.innerText = currentLang === 'it' ? 'Attendi 1 minuto prima di riprovare' : 'Please wait 1 min before retrying';
+                submitBtn.style.backgroundColor = '#b58d42'; // Colore Brass per l'avviso
+
+                // Dopo 3 secondi rimette il bottone a posto
+                setTimeout(() => resetBtn(originalText), 3000);
+                return;
+            }
+
+            // 1. SOSTITUISCI CON IL TUO URL /formResponse
+            const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/TUO_ID_DEL_FORM/formResponse';
+
+            // 2. SOSTITUISCI CON I TUOI ENTRY ID REALI
+            const formEntries = {
+                name: 'entry.1872588949',
+                company: 'entry.2117268565',
+                role: 'entry.1612400819',
+                phone: 'entry.909790694',
+                email: 'entry.1687488076',
+                need: 'entry.1543327281',
+                message: 'entry.652878835'
+            };
+
+            const formData = new FormData();
+            formData.append(formEntries.name, document.getElementById('name').value);
+            formData.append(formEntries.company, document.getElementById('company').value);
+            formData.append(formEntries.role, document.getElementById('role').value);
+            formData.append(formEntries.phone, document.getElementById('phone').value);
+            formData.append(formEntries.email, document.getElementById('email').value);
+            formData.append(formEntries.need, document.getElementById('need').value || '');
+            formData.append(formEntries.message, document.getElementById('message').value);
+
+            // Cambia stato bottone: In caricamento
+            submitBtn.innerText = currentLang === 'it' ? 'Invio in corso...' : 'Transmitting...';
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+
+            fetch(GOOGLE_FORM_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                // Registra l'ora dell'invio per l'anti-flood
+                localStorage.setItem('soia_last_submit', Date.now().toString());
+                showSuccessMessage(originalText);
+            }).catch(error => {
+                console.error('Errore invio:', error);
+                submitBtn.innerText = currentLang === 'it' ? 'Errore. Riprova.' : 'Error. Retry.';
+                submitBtn.style.backgroundColor = '#ff5f56'; // Rosso per evidenziare l'errore
+                setTimeout(() => resetBtn(originalText), 4000);
+            });
+        });
+
+        function showSuccessMessage(originalText) {
+            submitBtn.innerText = currentLang === 'it' ? 'Richiesta Trasmessa' : 'Request Transmitted';
+            submitBtn.style.backgroundColor = '#2e543b'; // Verde scuro per confermare
+            contactForm.reset();
+
+            setTimeout(() => resetBtn(originalText), 4000);
+        }
+
+        function resetBtn(originalText) {
+            if(originalText) submitBtn.innerText = originalText;
+            submitBtn.style.backgroundColor = '';
+            submitBtn.style.opacity = '1';
+            submitBtn.disabled = false;
+        }
     </script>
 </body>
 </html>
