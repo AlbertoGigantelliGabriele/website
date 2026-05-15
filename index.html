@@ -38,7 +38,7 @@
                         'dark-border': '#2d332f',
                         'dark-text': '#e3e6e4',
                         'dark-text-muted': '#8c948f',
-                        'dark-primary': '#8ba894',
+                        'dark-primary': '#b58d42',
                         'dark-primary-container': '#263b2d',
                     },
                     fontFamily: {
@@ -73,7 +73,7 @@
 
         /* Focus e Placeholder Input */
         .input-line:focus { border-bottom-color: #1a3b26; outline: none; }
-        html.dark .input-line:focus { border-bottom-color: #8ba894; }
+        html.dark .input-line:focus { border-bottom-color: #b58d42; }
         .input-line::placeholder { color: rgba(66, 72, 67, 0.35); }
         html.dark .input-line::placeholder { color: rgba(140, 148, 143, 0.4); }
 
@@ -211,16 +211,15 @@
                         Solutions that<br><em class="italic text-primary dark:text-dark-primary">truly solve.</em>
                     </h1>
 
-                    <p class="font-sans text-base sm:text-lg leading-relaxed text-on-surface-variant dark:text-dark-text-muted max-w-md mb-12 transition-colors" data-i18n="hero_sub">
-                        We don't implement technology for the sake of it. We design strategic intelligence architectures that amplify decision-making capabilities, optimize complex processes, and generate measurable impact.
-                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 w-full">
+                        <!-- Bottone 1: Stile Pieno (Solid) -->
+                        <a href="#contact" class="flex items-center justify-center bg-primary dark:bg-dark-primary-container text-white border border-primary dark:border-dark-primary-container font-mono text-xs tracking-[0.15em] uppercase px-8 h-[54px] w-full sm:w-auto hover:bg-[#122a1b] hover:border-[#122a1b] dark:hover:bg-[#5f876e] dark:hover:border-[#5f876e] transition-all text-center" data-i18n="hero_cta1">
+                            Contact Us
+                        </a>
 
-                    <div class="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-4 sm:gap-6 w-full">
-                        <a href="#contact" class="bg-primary dark:bg-dark-primary-container text-white font-mono text-xs tracking-[0.15em] uppercase px-8 py-4 hover:bg-[#122a1b] dark:hover:bg-[#5f876e] transition-colors w-full sm:w-auto text-center" data-i18n="hero_cta1">Contact Us</a>
-
-                        <!-- Su mobile diventa un bottone con bordo, su PC torna testo normale con freccia -->
-                        <a href="#approach" class="font-mono text-xs tracking-[0.15em] uppercase text-on-surface-variant dark:text-dark-text-muted hover:text-primary dark:hover:text-dark-primary flex items-center justify-center gap-2 group transition border fine-border sm:border-transparent py-4 sm:py-4 px-8 w-full sm:w-auto text-center" data-i18n="hero_cta2">
-                            Discover the Method <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        <!-- Bottone 2: Stile Vuoto (Outline) -->
+                        <a href="#approach" class="flex items-center justify-center bg-transparent text-on-surface dark:text-dark-text border border-outline-variant dark:border-dark-border font-mono text-xs tracking-[0.15em] uppercase px-8 h-[54px] w-full sm:w-auto hover:border-primary dark:hover:border-dark-primary hover:text-primary dark:hover:text-dark-primary gap-2 group transition-all text-center" data-i18n="hero_cta2">
+                            Discover the Method <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </a>
                     </div>
 
@@ -292,14 +291,17 @@
             </div>
         </section>
 
-        <!-- Approach Section -->
-        <section id="approach" class="snap-section lg:h-[calc(100vh-72px)] px-6 md:px-12 lg:px-16 py-20 lg:py-0 border-b fine-border-b bg-surface-container-low dark:bg-dark-bg flex flex-col justify-center transition-colors">
+
+<!-- Approach Section -->
+        <section id="approach" class="snap-section lg:h-[calc(100vh-72px)] px-0 md:px-12 lg:px-16 py-20 lg:py-0 border-b fine-border-b bg-surface-container-low dark:bg-dark-bg flex flex-col justify-center transition-colors">
             <div class="max-w-7xl mx-auto w-full">
-                <div class="flex items-center gap-4 mb-10">
+                <!-- Spazio laterale solo per il titolo -->
+                <div class="flex items-center gap-4 mb-10 px-6 md:px-0">
                     <h2 class="font-serif text-3xl md:text-5xl text-primary-container dark:text-dark-primary transition-colors" data-i18n="approach_title">Approach</h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-outline-variant dark:bg-dark-border fine-border border">
+                <!-- Quadrati larghi a tutto schermo su mobile -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-outline-variant dark:bg-dark-border fine-border border-y md:border md:rounded-sm">
                     <!-- Cards -->
                     <div class="bg-surface dark:bg-dark-surface p-8 group hover:bg-white dark:hover:bg-[#222623] transition-colors relative">
                         <div class="absolute top-4 right-4 font-mono text-[10px] text-outline-variant dark:text-dark-text-muted">SEQ.01</div>
@@ -330,21 +332,21 @@
                     </div>
                 </div>
 
-                <!-- Editor Codice IDE Apple-Style -->
-                <div class="mt-12 bg-[#1e1e1e] rounded-xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/5">
-                    <!-- Mac Header -->
+                <!-- Editor Codice IDE (Colori rivisti in Ottone e Pietra) -->
+                <div class="mt-12 md:mt-16 bg-[#1e1e1e] md:rounded-xl overflow-hidden shadow-2xl border-y md:border border-black/10 dark:border-white/5">
+                    <!-- Mac Header Minimalista -->
                     <div class="px-4 py-3 border-b border-black/20 dark:border-white/10 flex items-center gap-2 bg-[#2d2d2d]">
-                        <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
-                        <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                        <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#424843]"></div>
+                        <div class="w-3 h-3 rounded-full bg-[#424843]"></div>
+                        <div class="w-3 h-3 rounded-full bg-brass"></div>
                         <span class="ml-4 font-mono text-[10px] text-white/50 tracking-widest uppercase">sys_eval: ROI_METRIC_THRESHOLD</span>
                     </div>
                     <!-- IDE Body -->
-                    <div class="p-6 md:p-8 font-mono text-sm md:text-base text-[#d4d4d4] overflow-x-auto whitespace-nowrap bg-[#1e1e1e]">
-                        <span class="text-[#569cd6]">IF</span> ( <span class="text-[#9cdcfe]">Value_Created</span> > <span class="text-[#9cdcfe]">Tech_Debt</span> + <span class="text-[#9cdcfe]">Opex</span> ) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-[#c586c0]">RETURN</span> <span class="text-[#ce9178]">Proceed_to_Execution</span>;<br>
-                        } <span class="text-[#569cd6]">ELSE</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-[#f44747]">ABORT</span> <span class="text-[#6a9955] italic">// Force Redesign Phase</span><br>
+                    <div class="p-6 md:p-8 font-mono text-sm md:text-base text-[#dadad8] overflow-x-auto whitespace-nowrap bg-[#1e1e1e]">
+                        <span class="text-brass">IF</span> ( <span class="text-white">Value_Created</span> > <span class="text-white">Tech_Debt</span> + <span class="text-white">Opex</span> ) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-brass">RETURN</span> <span class="text-white">Proceed_to_Execution</span>;<br>
+                        } <span class="text-brass">ELSE</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-brass">ABORT</span> <span class="text-[#727972] italic">// Force Redesign Phase</span><br>
                         }
                     </div>
                 </div>
@@ -352,17 +354,16 @@
         </section>
 
         <!-- Services Section -->
-        <!-- Services Section -->
-        <section id="services" class="snap-section lg:h-[calc(100vh-72px)] px-6 md:px-12 lg:px-16 py-20 lg:py-0 border-b fine-border-b bg-surface dark:bg-dark-bg flex flex-col justify-center transition-colors">
+        <section id="services" class="snap-section lg:h-[calc(100vh-72px)] px-0 md:px-12 lg:px-16 py-20 lg:py-0 border-b fine-border-b bg-surface dark:bg-dark-bg flex flex-col justify-center transition-colors">
             <div class="max-w-7xl mx-auto w-full">
-                <div class="flex items-center gap-4 mb-10">
+                <!-- Spazio laterale solo per il titolo -->
+                <div class="flex items-center gap-4 mb-10 px-6 md:px-0">
                     <h2 class="font-serif text-3xl md:text-5xl text-primary-container dark:text-dark-primary transition-colors" data-i18n="services_title">Services</h2>
                 </div>
 
-                <!-- Modificato il gap da gap-8 a gap-4 md:gap-6 lg:gap-8 -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+                <!-- UNA SOLA riga griglia -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 md:gap-8">
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <!-- Serv 1 -->
                     <div class="border fine-border p-10 hover:border-primary-container dark:hover:border-dark-primary transition-colors duration-300 flex flex-col h-full bg-white dark:bg-dark-surface">
                         <div class="flex justify-between items-start mb-8">
@@ -429,11 +430,11 @@
         </section>
 
         <!-- Contact Section (carosello + form avanzato) -->
-        <section id="contact" class="snap-section lg:min-h-[calc(100vh-72px)] px-6 md:px-12 lg:px-16 py-20 bg-surface-container-low dark:bg-dark-bg border-b fine-border-b flex flex-col justify-start transition-colors">
+        <section id="contact" class="snap-section lg:min-h-[calc(100vh-72px)] pt-0 pb-20 lg:pb-24 px-0 bg-surface-container-low dark:bg-dark-bg border-b fine-border-b flex flex-col justify-start transition-colors">
 
             <div class="max-w-7xl mx-auto w-full">
                 <!-- Tech Ecosystem Carousel -->
-                <div class="w-full mb-10">
+                <div class="w-full mb-10 pt-4 md:pt-0">
                     <div class="flex flex-col md:flex-row items-center justify-center mb-4 gap-2 md:gap-4 text-center">
                         <span class="font-mono text-[10px] tracking-widest text-outline uppercase" data-i18n="tech_label">Tech Ecosystem</span>
                         <span class="hidden md:block w-4 h-px bg-outline-variant/30 dark:bg-dark-border"></span>
