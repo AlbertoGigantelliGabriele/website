@@ -6,11 +6,9 @@
     <meta name="description" content="S.O.I.A. - Strategic Intelligence & Applied AI. Solutions that truly solve.">
     <title>S.O.I.A. – Strategic Intelligence</title>
 
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&family=Noto+Serif:ital,wght@0,300;0,400;1,300;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,28 +16,28 @@
             theme: {
                 extend: {
                     colors: {
-                        'surface': '#faf9f7',
-                        'surface-dim': '#dadad8',
-                        'surface-bright': '#faf9f7',
-                        'surface-container-low': '#f4f3f1',
-                        'on-surface': '#1a1c1b',
-                        'on-surface-variant': '#424843',
-                        'outline': '#727972',
-                        'outline-variant': '#c2c8c1',
-                        'primary': '#1a3b26',
-                        'on-primary': '#ffffff',
-                        'primary-container': '#2e543b',
-                        'brass': '#b58d42',
-                        'brand-dark': '#132a1d',
+                        // Palette Chiara: Bianco Pietra, Verdone
+                        'surface': '#f5f4f0', // Bianco Pietra
+                        'surface-dim': '#ebeae6', // Pietra leggermente ombrato
+                        'on-surface': '#0f2418', // Verdone scurissimo (Testo)
+                        'on-surface-variant': '#2c4034', // Verdone desaturato
+                        'outline': '#6b7d73',
+                        'outline-variant': '#b0b8b4',
+                        'primary': '#163322', // Verdone pieno
+                        'on-primary': '#f5f4f0', // Testo su bottoni
 
-                        // Palette scura
-                        'dark-bg': '#151716',
-                        'dark-surface': '#1c1f1d',
-                        'dark-border': '#2d332f',
-                        'dark-text': '#e3e6e4',
-                        'dark-text-muted': '#8c948f',
-                        'dark-primary': '#b58d42',
-                        'dark-primary-container': '#263b2d',
+                        // Elemento comune
+                        'brass': '#b58d42', // Ottone
+                        'brand-dark': '#070f0a', // Sfondo scuro assoluto per sezioni fisse
+
+                        // Palette Scura: Verdone Profondo, Pietra
+                        'dark-bg': '#070f0a', // Verdone quasi nero
+                        'dark-surface': '#0f1a14', // Superfici nel tema scuro
+                        'dark-border': '#1e3326',
+                        'dark-text': '#f5f4f0', // Bianco Pietra per il testo
+                        'dark-text-muted': '#96a69d',
+                        'dark-primary': '#b58d42', // Ottone per gli accenti
+                        'dark-primary-container': '#163322',
                     },
                     fontFamily: {
                         'serif':['Noto Serif', 'serif'],
@@ -57,45 +55,89 @@
             overflow-x: hidden;
         }
 
-        /* Bordi dinamici */
-        .fine-border { border-color: rgba(139, 130, 121, 0.25); border-width: 1px; }
-        .fine-border-b { border-bottom-color: rgba(139, 130, 121, 0.25); border-bottom-width: 1px; }
-        .fine-border-t { border-top-color: rgba(139, 130, 121, 0.25); border-top-width: 1px; }
-        .fine-border-r { border-right-color: rgba(139, 130, 121, 0.25); border-right-width: 1px; }
+        /* Bordi dinamici - Adattati alla nuova palette */
+        .fine-border { border-color: rgba(22, 51, 34, 0.15); border-width: 1px; }
+        .fine-border-b { border-bottom-color: rgba(22, 51, 34, 0.15); border-bottom-width: 1px; }
+        .fine-border-t { border-top-color: rgba(22, 51, 34, 0.15); border-top-width: 1px; }
+        .fine-border-r { border-right-color: rgba(22, 51, 34, 0.15); border-right-width: 1px; }
 
         html.dark .fine-border, html.dark .fine-border-b, html.dark .fine-border-t, html.dark .fine-border-r {
-            border-color: #2d332f;
+            border-color: #1e3326;
         }
 
         /* Navbar Glass */
-        .glass-nav { background: rgba(250, 249, 247, 0.93); backdrop-filter: blur(14px); }
-        html.dark .glass-nav { background: rgba(21, 23, 22, 0.93); }
+        .glass-nav {
+            background: rgba(245, 244, 240, 0.80);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        html.dark .glass-nav {
+            background: rgba(7, 15, 10, 0.80);
+        }
+
+        /* Menu Mobile Glass */
+        .glass-menu {
+            background: rgba(245, 244, 240, 0.80); /* Ora ha la stessa trasparenza del tema scuro/nav */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        html.dark .glass-menu {
+            background: rgba(7, 15, 10, 0.80);
+        }
+
+        /* Pannelli Vetro */
+        .glass-panel {
+            background: rgba(7, 15, 10, 0.80); /* Uniformato con gli altri elementi glass */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(181, 141, 66, 0.12);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Effetto luminoso indipendente */
+        .glow-item {
+            border: 1px solid transparent; /* Evita "salti" di layout quando appare il bordo */
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Mantiene il bordo visibile di default solo se è anche un pannello di vetro (come l'orologio) */
+        .glass-panel.glow-item {
+            border-color: rgba(181, 141, 66, 0.12);
+        }
+        .glow-item:hover {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-color: rgba(181, 141, 66, 0.4) !important;
+            box-shadow: 0 0 20px rgba(181, 141, 66, 0.1);
+            z-index: 10; /* Fa in modo che l'ombra si sovrapponga correttamente agli elementi vicini */
+        }
 
         /* Focus e Placeholder Input */
-        .input-line:focus { border-bottom-color: #1a3b26; outline: none; }
+        .input-line:focus { border-bottom-color: #163322; outline: none; }
         html.dark .input-line:focus { border-bottom-color: #b58d42; }
-        .input-line::placeholder { color: rgba(66, 72, 67, 0.35); }
-        html.dark .input-line::placeholder { color: rgba(140, 148, 143, 0.4); }
+        .input-line::placeholder { color: rgba(44, 64, 52, 0.4); }
+        html.dark .input-line::placeholder { color: rgba(150, 166, 157, 0.4); }
 
         /* Select freccia personalizzata */
         select.input-line {
             -webkit-appearance: none;
             -moz-appearance: none;
-            background-image: url("data:image/svg+xml;utf8,<svg fill='%23727972' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-image: url("data:image/svg+xml;utf8,<svg fill='%236b7d73' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
             background-repeat: no-repeat;
             background-position-x: 100%;
             background-position-y: 50%;
+        }
+        html.dark select.input-line {
+            background-image: url("data:image/svg+xml;utf8,<svg fill='%2396a69d' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
         }
 
         /* Animazioni base */
         @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         .animate-pulse-fast { animation: pulse-dot 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
-        /* Scrollbar */
+        /* Scrollbar - Ottone e Verdone/Pietra */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #dadad8; }
-        html.dark ::-webkit-scrollbar-thumb { background: #2d332f; }
+        ::-webkit-scrollbar-thumb { background: #b0b8b4; }
+        html.dark ::-webkit-scrollbar-thumb { background: #1e3326; }
         ::-webkit-scrollbar-thumb:hover { background: #b58d42; }
 
         /* Carosello Loghi */
@@ -112,37 +154,22 @@
            SNAP LOGIC: DESKTOP ONLY (≥1024px)
            ---------------------------------------------------------------- */
         @media (min-width: 1024px) {
-            .snap-root {
-                scroll-snap-type: y mandatory;
-                scroll-padding-top: 72px;
-            }
-            .snap-section {
-                scroll-snap-align: start;
-                scroll-snap-stop: always;
-            }
+            .snap-root { scroll-snap-type: y mandatory; scroll-padding-top: 72px; }
+            .snap-section { scroll-snap-align: start; scroll-snap-stop: always; }
         }
-
         @media not all and (min-width: 1024px) {
-            .snap-root {
-                scroll-snap-type: none;
-                scroll-padding-top: 0;
-            }
-            .snap-section {
-                scroll-snap-align: none;
-                scroll-snap-stop: normal;
-            }
+            .snap-root { scroll-snap-type: none; scroll-padding-top: 0; }
+            .snap-section { scroll-snap-align: none; scroll-snap-stop: normal; }
         }
     </style>
 </head>
 <body class="font-sans bg-surface dark:bg-dark-bg text-on-surface dark:text-dark-text transition-colors duration-300">
 
-    <!-- Navigation (Altezza fissa 72px) -->
     <nav class="fixed top-0 w-full h-[72px] z-50 glass-nav fine-border-b flex justify-between items-center px-6 md:px-12 transition-all">
-        <a href="javascript:void(0)" class="font-serif text-xl tracking-[0.18em] text-on-surface dark:text-dark-text flex items-center gap-2">
+        <a href="#" class="font-serif text-xl tracking-[0.18em] text-on-surface dark:text-dark-text flex items-center gap-2">
             S.O.I.A.
         </a>
 
-        <!-- Desktop Menu -->
         <div class="hidden md:flex items-center gap-4">
             <a href="#approach" class="font-mono text-xs tracking-[0.15em] uppercase text-outline dark:text-dark-text-muted hover:text-primary dark:hover:text-dark-primary transition" data-i18n="nav_approach">Approach</a>
             <div class="w-px h-3 bg-outline-variant dark:bg-dark-border mx-2"></div>
@@ -164,14 +191,20 @@
             </button>
         </div>
 
-        <!-- Mobile Menu Button -->
         <button id="mobileMenuBtn" class="md:hidden text-on-surface dark:text-dark-text p-2">
             <span class="material-symbols-outlined">menu</span>
         </button>
     </nav>
 
-    <!-- Mobile Dropdown -->
-    <div id="mobileMenu" class="fixed inset-0 z-[60] bg-surface dark:bg-dark-bg flex flex-col items-center justify-center gap-6 translate-y-[-100%] transition-transform duration-500 ease-in-out md:hidden">
+    <div id="mobileMenu" class="fixed inset-0 z-[60] glass-menu flex flex-col items-center justify-center gap-6 translate-y-[-100%] transition-transform duration-500 ease-in-out md:hidden">
+        <div class="absolute top-0 left-0 w-full h-[72px] flex justify-between items-center px-6">
+            <span class="font-serif text-xl tracking-[0.18em] text-on-surface-variant dark:text-dark-text cursor-pointer" onclick="closeMenu()">
+                S.O.I.A.
+            </span>
+            <button onclick="closeMenu()" class="text-on-surface-variant dark:text-dark-text p-2 flex items-center justify-center">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
         <a href="#approach" class="font-mono text-sm tracking-[0.15em] uppercase text-on-surface-variant dark:text-dark-text hover:text-primary dark:hover:text-dark-primary" onclick="closeMenu()" data-i18n="nav_approach">Approach</a>
         <div class="w-12 h-px bg-outline-variant/30 dark:bg-dark-border"></div>
 
@@ -186,20 +219,16 @@
         <div class="flex items-center gap-6 mt-8">
             <button class="font-mono text-sm tracking-[0.15em] text-primary dark:text-dark-primary font-bold" onclick="toggleLanguage(); closeMenu();">EN / IT</button>
             <div class="w-px h-4 bg-outline-variant/50 dark:bg-dark-border"></div>
-            <!-- Mobile Theme Toggle -->
-            <button class="text-on-surface-variant dark:text-dark-text-muted hover:text-primary flex items-center" onclick="toggleTheme(); closeMenu();">
+            <button class="text-on-surface-variant dark:text-dark-text-muted hover:text-primary dark:hover:text-dark-primary flex items-center" onclick="toggleTheme(); closeMenu();">
                 <span class="material-symbols-outlined" id="mobileThemeIcon">dark_mode</span>
             </button>
         </div>
     </div>
 
-    <!-- MAIN WRAPPER -->
     <main class="pt-[72px]">
 
-        <!-- Hero Section -->
         <section class="snap-section lg:h-[calc(100vh-72px)] grid grid-cols-1 lg:grid-cols-2 relative">
 
-<!-- Left Side (Text) -->
             <div class="relative flex flex-col justify-center px-6 md:px-12 lg:px-16 py-16 lg:py-12 border-b lg:border-b-0 lg:border-r fine-border-r fine-border-b bg-surface dark:bg-dark-bg transition-colors h-full">
                 <div class="relative z-10 max-w-2xl mx-auto lg:mx-0 w-full">
                     <div class="flex items-center gap-3 mb-8">
@@ -212,79 +241,74 @@
                     </h1>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 w-full">
-                        <!-- Bottone 1: Stile Pieno (Solid) -->
-                        <a href="#contact" class="flex items-center justify-center bg-primary dark:bg-dark-primary-container text-white border border-primary dark:border-dark-primary-container font-mono text-xs tracking-[0.15em] uppercase px-8 h-[54px] w-full sm:w-auto hover:bg-[#122a1b] hover:border-[#122a1b] dark:hover:bg-[#5f876e] dark:hover:border-[#5f876e] transition-all text-center" data-i18n="hero_cta1">
+                        <a href="#contact" class="flex items-center justify-center bg-primary dark:bg-dark-primary text-on-primary dark:text-dark-bg border border-primary dark:border-dark-primary font-mono text-xs tracking-[0.15em] uppercase px-8 h-[54px] w-full sm:w-auto hover:bg-[#0f2418] hover:border-[#0f2418] dark:hover:bg-[#c49a4f] dark:hover:border-[#c49a4f] transition-all text-center font-medium" data-i18n="hero_cta1">
                             Contact Us
                         </a>
 
-                        <!-- Bottone 2: Stile Vuoto (Outline) -->
                         <a href="#approach" class="flex items-center justify-center bg-transparent text-on-surface dark:text-dark-text border border-outline-variant dark:border-dark-border font-mono text-xs tracking-[0.15em] uppercase px-8 h-[54px] w-full sm:w-auto hover:border-primary dark:hover:border-dark-primary hover:text-primary dark:hover:text-dark-primary gap-2 group transition-all text-center" data-i18n="hero_cta2">
                             Discover the Method <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
                         </a>
                     </div>
 
-                    <!-- Live Training Ticker -->
-                    <div class="flex flex-wrap items-center gap-2 sm:gap-3 mt-12 sm:mt-16 p-3 bg-white dark:bg-dark-surface border fine-border w-full sm:w-fit shadow-sm transition-colors overflow-hidden">
+                    <div class="flex flex-wrap items-center gap-2 sm:gap-3 mt-12 sm:mt-16 p-3 bg-[#ffffff] dark:bg-dark-surface border fine-border w-full sm:w-fit shadow-sm transition-colors overflow-hidden">
                         <div class="w-2 h-2 shrink-0 rounded-full bg-primary dark:bg-dark-primary animate-pulse-fast"></div>
                         <span id="live-ticker" class="font-mono text-[9px] sm:text-[11px] tracking-[0.05em] sm:tracking-[0.1em] text-on-surface-variant dark:text-dark-text-muted uppercase truncate sm:whitespace-nowrap"></span>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Side (Watch, Stats & Floating Formulas) -->
-            <div class="bg-brand-dark relative flex flex-col justify-center items-center py-12 px-6 overflow-hidden">
-                <!-- Canvas Formule in Background -->
+            <div class="bg-brand-dark relative flex flex-col justify-center items-center py-12 px-6 overflow-hidden transition-colors">
                 <canvas id="math-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
 
                 <div class="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-brass via-[#c4927a] to-transparent z-10"></div>
 
                 <div class="relative z-20 flex flex-col items-center gap-16 w-full max-w-[420px]">
+                    <div class="glass-panel glow-item bg-brass/10 p-2 rounded-full ">
+                        <svg id="watchface" width="190" height="190" viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="99" fill="none" class="stroke-brass" stroke-width="0.5"/>
+                            <circle cx="100" cy="100" r="90" fill="none" class="stroke-brass opacity-20" stroke-width="0.5"/>
 
-                    <!-- Orologio Classico -->
-                    <svg id="watchface" width="240" height="240" viewBox="0 0 200 200" class="drop-shadow-2xl">
-                        <circle cx="100" cy="100" r="96" fill="none" class="stroke-brass" stroke-width="0.5"/>
-                        <circle cx="100" cy="100" r="88" fill="none" class="stroke-brass opacity-30" stroke-width="0.5"/>
-                        <!-- Fondo orologio 100% opaco, nasconde le formule -->
-                        <circle cx="100" cy="100" r="85" class="fill-[#0e1f15]"/>
+                            <g id="min-markers" class="stroke-brass/40" stroke-width="0.75"></g>
+                            <g id="hr-markers" class="stroke-brass" stroke-width="1.5"></g>
 
-                        <g id="min-markers" class="stroke-white/30" stroke-width="0.75"></g>
-                        <g id="hr-markers" class="stroke-brass" stroke-width="1.5"></g>
+                            <text x="100" y="66" text-anchor="middle" font-family="'Noto Serif', serif" font-size="8" class="fill-surface/60" letter-spacing="3">S.O.I.A.</text>
 
-                        <text x="100" y="66" text-anchor="middle" font-family="'Noto Serif', serif" font-size="8" class="fill-white/40" letter-spacing="3">S.O.I.A.</text>
+                            <g id="hour-hand-group">
+                                <line x1="100" y1="100" x2="100" y2="55" class="stroke-brass" stroke-width="2.5" stroke-linecap="round"/>
+                            </g>
+                            <g id="min-hand-group">
+                                <line x1="100" y1="100" x2="100" y2="28" class="stroke-brass" stroke-width="1.5" stroke-linecap="round"/>
+                            </g>
+                            <g id="sec-hand-group">
+                                <line x1="100" y1="115" x2="100" y2="22" class="stroke-brass" stroke-width="0.75" stroke-linecap="round"/>
+                                <circle cx="100" cy="108" r="2.5" class="fill-surface/10 stroke-brass" stroke-width="0.75"/>
+                            </g>
 
-                        <!-- Lancette -->
-                        <g id="hour-hand-group">
-                            <line x1="100" y1="100" x2="100" y2="55" class="stroke-white" stroke-width="2.5" stroke-linecap="round"/>
-                        </g>
-                        <g id="min-hand-group">
-                            <line x1="100" y1="100" x2="100" y2="28" class="stroke-white" stroke-width="1.5" stroke-linecap="round"/>
-                        </g>
-                        <g id="sec-hand-group">
-                            <line x1="100" y1="115" x2="100" y2="22" class="stroke-brass" stroke-width="0.75" stroke-linecap="round"/>
-                            <circle cx="100" cy="108" r="2.5" class="fill-[#0e1f15] stroke-brass" stroke-width="0.75"/>
-                        </g>
+                            <circle cx="100" cy="100" r="2.5" class="fill-brass"/>
+                            <circle cx="100" cy="100" r="0.8" class="fill-surface/30"/>
+                        </svg>
+                    </div>
 
-                        <circle cx="100" cy="100" r="2.5" class="fill-brass"/>
-                        <circle cx="100" cy="100" r="0.8" class="fill-[#0e1f15]"/>
-                    </svg>
+                    <div class="grid grid-cols-2 gap-[1px] bg-brass/10 w-full glass-panel overflow-hidden rounded-sm">
+                        <div class="p-6 text-center glow-item relative">
+                        <div class="font-serif text-3xl md:text-4xl text-surface font-light mb-1">90<span class="text-xl text-brass italic">%</span></div>
+                        <div class="font-mono text-[9px] tracking-widest text-surface/50 uppercase" data-i18n="stat_1">Projects</div>
+                    </div>
 
-                    <!-- Stats Strip -->
-                    <div class="grid grid-cols-2 gap-[1px] bg-[rgba(255,255,255,0.05)] w-full">
-                        <div class="bg-[#0e1f15]/90 p-6 text-center backdrop-blur-md">
-                            <div class="font-serif text-3xl md:text-4xl text-white font-light mb-1">94<span class="text-xl text-brass italic">%</span></div>
-                            <div class="font-mono text-[9px] tracking-widest text-white/50 uppercase" data-i18n="stat_1">Projects</div>
-                        </div>
-                        <div class="bg-[#0e1f15]/90 p-6 text-center backdrop-blur-md">
-                            <div class="font-serif text-3xl md:text-4xl text-white font-light mb-1">3<span class="text-xl text-brass italic">×</span></div>
-                            <div class="font-mono text-[9px] tracking-widest text-white/50 uppercase" data-i18n="stat_2">Avg ROI</div>
-                        </div>
-                        <div class="bg-[#0e1f15]/90 p-6 text-center backdrop-blur-md">
-                            <div class="font-serif text-3xl md:text-4xl text-white font-light mb-1">60<span class="text-xl text-brass italic">+</span></div>
-                            <div class="font-mono text-[9px] tracking-widest text-white/50 uppercase" data-i18n="stat_3">Companies</div>
-                        </div>
-                        <div class="bg-[#0e1f15]/90 p-6 text-center backdrop-blur-md">
-                            <div class="font-serif text-3xl md:text-4xl text-white font-light mb-1">8<span class="text-xl text-brass italic">y</span></div>
-                            <div class="font-mono text-[9px] tracking-widest text-white/50 uppercase" data-i18n="stat_4">Experience</div>
+                    <div class="p-6 text-center glow-item relative">
+                        <div class="font-serif text-3xl md:text-4xl text-surface font-light mb-1">3<span class="text-xl text-brass italic">×</span></div>
+                        <div class="font-mono text-[9px] tracking-widest text-surface/50 uppercase" data-i18n="stat_2">Avg ROI</div>
+                    </div>
+
+                    <div class="p-6 text-center glow-item relative">
+                        <div class="font-serif text-3xl md:text-4xl text-surface font-light mb-1">6<span class="text-xl text-brass italic">+</span></div>
+                        <div class="font-mono text-[9px] tracking-widest text-surface/50 uppercase" data-i18n="stat_3">Companies</div>
+                    </div>
+
+                    <div class="p-6 text-center glow-item relative">
+                        <div class="font-serif text-3xl md:text-4xl text-surface font-light mb-1">8<span class="text-xl text-brass italic">y</span></div>
+                        <div class="font-mono text-[9px] tracking-widest text-surface/50 uppercase" data-i18n="stat_4">Experience</div>
+                    </div>
                         </div>
                     </div>
                 </div>
@@ -292,39 +316,35 @@
         </section>
 
 
-<!-- Approach Section -->
-        <section id="approach" class="snap-section lg:h-[calc(100vh-72px)] px-0 md:px-12 lg:px-16 py-20 lg:py-0 border-b fine-border-b bg-surface-container-low dark:bg-dark-bg flex flex-col justify-center transition-colors">
+        <section id="approach" class="snap-section lg:h-[calc(100vh-72px)] px-0 md:px-12 lg:px-16 py-20 lg:py-0 border-b fine-border-b bg-surface-dim dark:bg-dark-bg flex flex-col justify-center transition-colors">
             <div class="max-w-7xl mx-auto w-full">
-                <!-- Spazio laterale solo per il titolo -->
                 <div class="flex items-center gap-4 mb-10 px-6 md:px-0">
-                    <h2 class="font-serif text-3xl md:text-5xl text-primary-container dark:text-dark-primary transition-colors" data-i18n="approach_title">Approach</h2>
+                    <h2 class="font-serif text-3xl md:text-5xl text-primary dark:text-dark-primary transition-colors" data-i18n="approach_title">Approach</h2>
                 </div>
 
-                <!-- Quadrati larghi a tutto schermo su mobile -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-outline-variant dark:bg-dark-border fine-border border-y md:border md:rounded-sm">
-                    <!-- Cards -->
-                    <div class="bg-surface dark:bg-dark-surface p-8 group hover:bg-white dark:hover:bg-[#222623] transition-colors relative">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-outline-variant/50 dark:bg-dark-border fine-border border-y md:border md:rounded-sm">
+                    <div class="bg-surface dark:bg-dark-surface p-8 group hover:bg-[#ffffff] dark:hover:bg-[#13221a] transition-colors relative">
                         <div class="absolute top-4 right-4 font-mono text-[10px] text-outline-variant dark:text-dark-text-muted">SEQ.01</div>
                         <span class="material-symbols-outlined text-primary dark:text-dark-primary text-3xl mb-6 block transition-colors">biotech</span>
                         <h3 class="font-serif text-2xl mb-3 text-on-surface dark:text-dark-text transition-colors" data-i18n="app_1_t">Diagnosis</h3>
                         <p class="font-sans text-sm leading-relaxed text-on-surface-variant dark:text-dark-text-muted transition-colors" data-i18n="app_1_d">Structural analysis of bottlenecks and mapping of decision-making flows.</p>
                     </div>
 
-                    <div class="bg-surface dark:bg-dark-surface p-8 group hover:bg-white dark:hover:bg-[#222623] transition-colors relative">
+                    <div class="bg-surface dark:bg-dark-surface p-8 group hover:bg-[#ffffff] dark:hover:bg-[#13221a] transition-colors relative">
                         <div class="absolute top-4 right-4 font-mono text-[10px] text-outline-variant dark:text-dark-text-muted">SEQ.02</div>
                         <span class="material-symbols-outlined text-primary dark:text-dark-primary text-3xl mb-6 block transition-colors">architecture</span>
                         <h3 class="font-serif text-2xl mb-3 text-on-surface dark:text-dark-text transition-colors" data-i18n="app_2_t">Design</h3>
                         <p class="font-sans text-sm leading-relaxed text-on-surface-variant dark:text-dark-text-muted transition-colors" data-i18n="app_2_d">Architectural design of the AI ecosystem. Rigorous calculation of expected ROI.</p>
                     </div>
 
-                    <div class="bg-surface dark:bg-dark-surface p-8 group hover:bg-white dark:hover:bg-[#222623] transition-colors relative">
+                    <div class="bg-surface dark:bg-dark-surface p-8 group hover:bg-[#ffffff] dark:hover:bg-[#13221a] transition-colors relative">
                         <div class="absolute top-4 right-4 font-mono text-[10px] text-outline-variant dark:text-dark-text-muted">SEQ.03</div>
                         <span class="material-symbols-outlined text-primary dark:text-dark-primary text-3xl mb-6 block transition-colors">precision_manufacturing</span>
                         <h3 class="font-serif text-2xl mb-3 text-on-surface dark:text-dark-text transition-colors" data-i18n="app_3_t">Implementation</h3>
                         <p class="font-sans text-sm leading-relaxed text-on-surface-variant dark:text-dark-text-muted transition-colors" data-i18n="app_3_d">Iterative development, integration with legacy systems, and incremental deployment.</p>
                     </div>
 
-                    <div class="bg-surface dark:bg-dark-surface p-8 group hover:bg-white dark:hover:bg-[#222623] transition-colors relative">
+                    <div class="bg-surface dark:bg-dark-surface p-8 group hover:bg-[#ffffff] dark:hover:bg-[#13221a] transition-colors relative">
                         <div class="absolute top-4 right-4 font-mono text-[10px] text-outline-variant dark:text-dark-text-muted">SEQ.04</div>
                         <span class="material-symbols-outlined text-primary dark:text-dark-primary text-3xl mb-6 block transition-colors">sync_alt</span>
                         <h3 class="font-serif text-2xl mb-3 text-on-surface dark:text-dark-text transition-colors" data-i18n="app_4_t">Transfer</h3>
@@ -332,45 +352,37 @@
                     </div>
                 </div>
 
-                <!-- Editor Codice IDE (Colori rivisti in Ottone e Pietra) -->
-                <div class="mt-12 md:mt-16 bg-[#1e1e1e] md:rounded-xl overflow-hidden shadow-2xl border-y md:border border-black/10 dark:border-white/5">
-                    <!-- Mac Header Minimalista -->
-                    <div class="px-4 py-3 border-b border-black/20 dark:border-white/10 flex items-center gap-2 bg-[#2d2d2d]">
-                        <div class="w-3 h-3 rounded-full bg-[#424843]"></div>
-                        <div class="w-3 h-3 rounded-full bg-[#424843]"></div>
+                <div class="mt-12 md:mt-16 bg-[#0a140f] md:rounded-xl overflow-hidden shadow-2xl border-y md:border border-black/10 dark:border-white/5">
+                    <div class="px-4 py-3 border-b border-black/20 dark:border-white/10 flex items-center gap-2 bg-[#050a07]">
+                        <div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+                        <div class="w-3 h-3 rounded-full bg-outline-variant"></div>
                         <div class="w-3 h-3 rounded-full bg-brass"></div>
-                        <span class="ml-4 font-mono text-[10px] text-white/50 tracking-widest uppercase">sys_eval: ROI_METRIC_THRESHOLD</span>
+                        <span class="ml-4 font-mono text-[10px] text-surface/50 tracking-widest uppercase">sys_eval: ROI_METRIC_THRESHOLD</span>
                     </div>
-                    <!-- IDE Body -->
-                    <div class="p-6 md:p-8 font-mono text-sm md:text-base text-[#dadad8] overflow-x-auto whitespace-nowrap bg-[#1e1e1e]">
+                    <div class="p-6 md:p-8 font-mono text-sm md:text-base text-surface overflow-x-auto whitespace-nowrap bg-[#0a140f]">
                         <span class="text-brass">IF</span> ( <span class="text-white">Value_Created</span> > <span class="text-white">Tech_Debt</span> + <span class="text-white">Opex</span> ) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-brass">RETURN</span> <span class="text-white">Proceed_to_Execution</span>;<br>
                         } <span class="text-brass">ELSE</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-brass">ABORT</span> <span class="text-[#727972] italic">// Force Redesign Phase</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-brass">ABORT</span> <span class="text-outline italic">// Force Redesign Phase</span><br>
                         }
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Services Section -->
         <section id="services" class="snap-section lg:h-[calc(100vh-72px)] px-0 md:px-12 lg:px-16 py-20 lg:py-0 border-b fine-border-b bg-surface dark:bg-dark-bg flex flex-col justify-center transition-colors">
             <div class="max-w-7xl mx-auto w-full">
-                <!-- Spazio laterale solo per il titolo -->
                 <div class="flex items-center gap-4 mb-10 px-6 md:px-0">
-                    <h2 class="font-serif text-3xl md:text-5xl text-primary-container dark:text-dark-primary transition-colors" data-i18n="services_title">Services</h2>
+                    <h2 class="font-serif text-3xl md:text-5xl text-primary dark:text-dark-primary transition-colors" data-i18n="services_title">Services</h2>
                 </div>
 
-                <!-- UNA SOLA riga griglia -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 md:gap-8">
-
-                    <!-- Serv 1 -->
-                    <div class="border fine-border p-10 hover:border-primary-container dark:hover:border-dark-primary transition-colors duration-300 flex flex-col h-full bg-white dark:bg-dark-surface">
+                    <div class="border fine-border p-10 hover:border-primary dark:hover:border-dark-primary transition-colors duration-300 flex flex-col h-full bg-[#ffffff] dark:bg-dark-surface md:rounded-sm">
                         <div class="flex justify-between items-start mb-8">
                             <span class="material-symbols-outlined text-primary dark:text-dark-primary text-4xl">account_tree</span>
                             <span class="font-mono text-xs text-outline dark:text-dark-text-muted">SVR.A</span>
                         </div>
-                        <h3 class="font-serif text-2xl mb-4 dark:text-dark-text" data-i18n="srv_1_t">Process Automation</h3>
+                        <h3 class="font-serif text-2xl mb-4 text-on-surface dark:text-dark-text" data-i18n="srv_1_t">Process Automation</h3>
                         <p class="font-sans text-[15px] leading-relaxed text-on-surface-variant dark:text-dark-text-muted mb-10 flex-grow" data-i18n="srv_1_d">Identification and automation of high-volume repetitive tasks through agentic LLMs and RPA. We free human capital for high cognitive value activities.</p>
                         <div class="flex gap-3 mt-auto">
                             <span class="px-2 py-1 border fine-border font-mono text-[10px] text-outline dark:text-dark-text-muted">LLM AGENTS</span>
@@ -378,13 +390,12 @@
                         </div>
                     </div>
 
-                    <!-- Serv 2 -->
-                    <div class="border fine-border p-10 hover:border-primary-container dark:hover:border-dark-primary transition-colors duration-300 flex flex-col h-full bg-white dark:bg-dark-surface">
+                    <div class="border fine-border p-10 hover:border-primary dark:hover:border-dark-primary transition-colors duration-300 flex flex-col h-full bg-[#ffffff] dark:bg-dark-surface md:rounded-sm">
                         <div class="flex justify-between items-start mb-8">
                             <span class="material-symbols-outlined text-primary dark:text-dark-primary text-4xl">insights</span>
                             <span class="font-mono text-xs text-outline dark:text-dark-text-muted">SVR.B</span>
                         </div>
-                        <h3 class="font-serif text-2xl mb-4 dark:text-dark-text" data-i18n="srv_2_t">Data-Driven Decisions</h3>
+                        <h3 class="font-serif text-2xl mb-4 text-on-surface dark:text-dark-text" data-i18n="srv_2_t">Data-Driven Decisions</h3>
                         <p class="font-sans text-[15px] leading-relaxed text-on-surface-variant dark:text-dark-text-muted mb-10 flex-grow" data-i18n="srv_2_d">Data intelligence infrastructures that transform disaggregated data into real-time actionable insights for the C-Level.</p>
                         <div class="flex gap-3 mt-auto">
                             <span class="px-2 py-1 border fine-border font-mono text-[10px] text-outline dark:text-dark-text-muted">PREDICTIVE</span>
@@ -392,13 +403,12 @@
                         </div>
                     </div>
 
-                    <!-- Serv 3 -->
-                    <div class="border fine-border p-10 hover:border-primary-container dark:hover:border-dark-primary transition-colors duration-300 flex flex-col h-full bg-white dark:bg-dark-surface">
+                    <div class="border fine-border p-10 hover:border-primary dark:hover:border-dark-primary transition-colors duration-300 flex flex-col h-full bg-[#ffffff] dark:bg-dark-surface md:rounded-sm">
                         <div class="flex justify-between items-start mb-8">
                             <span class="material-symbols-outlined text-primary dark:text-dark-primary text-4xl">strategy</span>
                             <span class="font-mono text-xs text-outline dark:text-dark-text-muted">SVR.C</span>
                         </div>
-                        <h3 class="font-serif text-2xl mb-4 dark:text-dark-text" data-i18n="srv_3_t">AI Strategy & Governance</h3>
+                        <h3 class="font-serif text-2xl mb-4 text-on-surface dark:text-dark-text" data-i18n="srv_3_t">AI Strategy & Governance</h3>
                         <p class="font-sans text-[15px] leading-relaxed text-on-surface-variant dark:text-dark-text-muted mb-10 flex-grow" data-i18n="srv_3_d">Alignment of technological investments with business objectives. Definition of ethical and operational policies for AI adoption in the company.</p>
                         <div class="flex gap-3 mt-auto">
                             <span class="px-2 py-1 border fine-border font-mono text-[10px] text-outline dark:text-dark-text-muted">ROADMAP</span>
@@ -409,31 +419,27 @@
             </div>
         </section>
 
-        <!-- Manifesto Section -->
         <section id="manifesto" class="snap-section lg:h-[calc(100vh-72px)] px-6 md:px-12 lg:px-16 py-24 lg:py-0 bg-brand-dark relative overflow-hidden flex justify-center items-center transition-colors">
 
-            <!-- Canvas Rete Neurale visibile il giusto -->
             <div class="absolute inset-0 z-0 opacity-70">
                 <canvas id="neural-canvas" class="w-full h-full"></canvas>
             </div>
 
             <div class="relative z-10 max-w-4xl text-center pointer-events-none">
                 <p class="font-mono text-xs tracking-[0.2em] text-brass mb-8 uppercase" data-i18n="man_label">Our Vision</p>
-                <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.1] text-white font-light mb-10" data-i18n="man_title">
+                <h2 class="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.1] text-surface font-light mb-10" data-i18n="man_title">
                     "AI should make people<br><em class="text-brass italic">more capable</em>,<br>not dependent."
                 </h2>
                 <div class="w-12 h-[1px] bg-brass mx-auto mb-10"></div>
-                <p class="font-sans text-lg text-white/70 max-w-2xl mx-auto leading-relaxed font-light" data-i18n="man_desc">
+                <p class="font-sans text-lg text-surface/70 max-w-2xl mx-auto leading-relaxed font-light" data-i18n="man_desc">
                     We believe the best technology is the invisible one. The one that disappears into the efficiency of an organization that works better, and a team that operates with ultimate clarity.
                 </p>
             </div>
         </section>
 
-        <!-- Contact Section (carosello + form avanzato) -->
-        <section id="contact" class="snap-section lg:min-h-[calc(100vh-72px)] pt-0 pb-20 lg:pb-24 px-0 bg-surface-container-low dark:bg-dark-bg border-b fine-border-b flex flex-col justify-start transition-colors">
+        <section id="contact" class="snap-section lg:min-h-[calc(100vh-72px)] pt-0 pb-20 lg:pb-24 px-0 bg-surface-dim dark:bg-dark-bg border-b fine-border-b flex flex-col justify-start transition-colors">
 
             <div class="max-w-7xl mx-auto w-full">
-                <!-- Tech Ecosystem Carousel -->
                 <div class="w-full mb-10 pt-4 md:pt-0">
                     <div class="flex flex-col md:flex-row items-center justify-center mb-4 gap-2 md:gap-4 text-center">
                         <span class="font-mono text-[10px] tracking-widest text-outline uppercase" data-i18n="tech_label">Tech Ecosystem</span>
@@ -444,7 +450,6 @@
                     <div class="overflow-hidden mask-edges flex w-full py-4 group">
                         <div class="flex items-center gap-8 md:gap-12 pr-8 md:pr-12 w-max animate-[scroll-logos_90s_linear_infinite]" id="logo-track">
 
-                            <!-- Cloud & Infrastructure -->
                             <a href="javascript:void(0)" title="AWS" class="shrink-0 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 hover:scale-110">
                                 <img class="h-10 md:h-8 w-auto object-contain" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS">
                             </a>
@@ -461,7 +466,6 @@
                                 <img class="h-10 md:h-8 w-auto object-contain" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker">
                             </a>
 
-                            <!-- Data Ops & Workflow -->
                             <a href="javascript:void(0)" title="PostgreSQL" class="shrink-0 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 hover:scale-110">
                                 <img class="h-10 md:h-8 w-auto object-contain" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL">
                             </a>
@@ -478,7 +482,6 @@
                                 <img class="h-10 md:h-8 w-auto object-contain" src="https://cdn.simpleicons.org/mlflow/0194E2" alt="MLflow">
                             </a>
 
-                            <!-- ML Frameworks -->
                             <a href="javascript:void(0)" title="Python" class="shrink-0 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 hover:scale-110">
                                 <img class="h-10 md:h-8 w-auto object-contain" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python">
                             </a>
@@ -504,7 +507,6 @@
                                 <img class="h-10 md:h-8 w-auto object-contain" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/keras/keras-original.svg" alt="Keras">
                             </a>
 
-                            <!-- AI & Vector DBs -->
                             <a href="javascript:void(0)" title="OpenAI" class="shrink-0 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 hover:scale-110">
                                 <img class="h-10 md:h-8 w-auto object-contain dark:invert" src="https://commons.wikimedia.org/wiki/Special:FilePath/OpenAI_logo_2025_(symbol).svg" alt="OpenAI">
                             </a>
@@ -532,30 +534,33 @@
                             <a href="javascript:void(0)" title="GitHub" class="shrink-0 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 hover:scale-110">
                                 <img class="h-10 md:h-8 w-auto object-contain dark:invert" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub">
                             </a>
-
                         </div>
                     </div>
                     <div class="w-full h-px bg-outline-variant/30 dark:bg-dark-border mt-3"></div>
                 </div>
 
-                <!-- Contact Area -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full items-start">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full items-start px-6 md:px-12 lg:px-16">
 
-                    <!-- Info -->
-                    <div class="flex flex-col justify-center">
-                        <h2 class="font-serif text-3xl md:text-4xl text-primary-container dark:text-dark-primary transition-colors mb-4" data-i18n="contact_title">A problem to solve?</h2>
+                    <div class="flex flex-col justify-center items-center md:items-start text-center md:text-left">
+                        <h2 class="font-serif text-3xl md:text-4xl text-primary dark:text-dark-primary transition-colors mb-4" data-i18n="contact_title">A problem to solve?</h2>
+
                         <div class="w-12 h-[1px] bg-brass mb-6"></div>
+
                         <p class="font-sans text-[15px] leading-relaxed text-on-surface-variant dark:text-dark-text-muted max-w-md mb-8 transition-colors" data-i18n="contact_desc">
                             Fill out the form to request a preliminary audit. We carefully select projects to ensure the highest level of analytical rigor and measurable results.
                         </p>
-                        <div class="space-y-3 font-mono text-xs text-outline-variant dark:text-dark-text-muted transition-colors">
-                            <p class="flex items-center gap-3"><span class="material-symbols-outlined text-[16px]">mail</span> intelligence@soia.it</p>
-                            <p class="flex items-center gap-3"><span class="material-symbols-outlined text-[16px]">location_on</span> Milano, Italy · Remote</p>
+
+                        <div class="space-y-3 font-mono text-xs text-outline dark:text-dark-text-muted transition-colors w-full">
+                            <p class="flex items-center justify-center md:justify-start gap-3">
+                                <span class="material-symbols-outlined text-[16px]">mail</span> intelligence@soia.it
+                            </p>
+                            <p class="flex items-center justify-center md:justify-start gap-3">
+                                <span class="material-symbols-outlined text-[16px]">location_on</span> Milano, Italy · Remote
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Form arricchito (più campi) -->
-                    <div class="bg-white dark:bg-dark-surface p-6 md:p-8 border fine-border shadow-sm transition-colors">
+                    <div class="bg-[#ffffff] dark:bg-dark-surface p-6 md:p-8 border fine-border shadow-sm transition-colors md:rounded-sm">
                         <form id="contactForm" class="space-y-5">
                             <div class="hidden" aria-hidden="true">
                                 <label for="bot-check">Do not fill in this field if you are human</label>
@@ -564,29 +569,29 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div class="flex flex-col">
                                     <label for="name" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_name">Full Name</label>
-                                    <input type="text" id="name" required data-i18n-placeholder="ph_name" placeholder="e.g. John Doe" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
+                                    <input type="text" id="name" required data-i18n-placeholder="ph_name" placeholder="e.g. John Doe" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors focus:ring-0">
                                 </div>
                                 <div class="flex flex-col">
                                     <label for="company" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_company">Company</label>
-                                    <input type="text" id="company" required data-i18n-placeholder="ph_company" placeholder="e.g. Acme Corp" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
+                                    <input type="text" id="company" required data-i18n-placeholder="ph_company" placeholder="e.g. Acme Corp" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors focus:ring-0">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div class="flex flex-col">
                                     <label for="role" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_role">Role</label>
-                                    <input type="text" id="role" data-i18n-placeholder="ph_role" placeholder="e.g. CTO" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
+                                    <input type="text" id="role" data-i18n-placeholder="ph_role" placeholder="e.g. CTO" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors focus:ring-0">
                                 </div>
                                 <div class="flex flex-col">
                                     <label for="phone" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_phone">Phone Number</label>
-                                    <input type="tel" id="phone" data-i18n-placeholder="ph_phone" placeholder="e.g. +39 000 000 0000" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
+                                    <input type="tel" id="phone" data-i18n-placeholder="ph_phone" placeholder="e.g. +39 000 000 0000" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors focus:ring-0">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div class="flex flex-col">
                                     <label for="email" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_email">Professional Email</label>
-                                    <input type="email" id="email" required data-i18n-placeholder="ph_email" placeholder="name@company.com" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors">
+                                    <input type="email" id="email" required data-i18n-placeholder="ph_email" placeholder="name@company.com" class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors focus:ring-0">
                                 </div>
                                 <div class="flex flex-col">
                                     <label for="need" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_need">Specific Need</label>
@@ -602,10 +607,10 @@
 
                             <div class="flex flex-col">
                                 <label for="message" class="font-mono text-[10px] tracking-[0.15em] text-outline dark:text-dark-text-muted uppercase mb-1" data-i18n="form_message">Details</label>
-                                <textarea id="message" rows="2" data-i18n-placeholder="ph_message" placeholder="Briefly describe..." class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors resize-none"></textarea>
+                                <textarea id="message" rows="2" data-i18n-placeholder="ph_message" placeholder="Briefly describe..." class="bg-transparent border-0 border-b fine-border-b px-0 py-1.5 font-sans text-[14px] text-on-surface dark:text-dark-text input-line transition-colors resize-none focus:ring-0"></textarea>
                             </div>
 
-                            <button type="submit" class="bg-primary dark:bg-dark-primary-container text-white font-mono text-[11px] tracking-[0.15em] uppercase px-6 py-3 hover:bg-[#122a1b] dark:hover:bg-[#5f876e] transition-colors w-full" data-i18n="form_btn">
+                            <button type="submit" class="bg-primary dark:bg-dark-primary text-on-primary dark:text-dark-bg font-mono text-[11px] tracking-[0.15em] uppercase px-6 py-3 hover:bg-[#0f2418] dark:hover:bg-[#c49a4f] transition-colors w-full font-medium" data-i18n="form_btn">
                                 Transmit Request
                             </button>
                         </form>
@@ -614,29 +619,38 @@
 
             </div>
         </section>
-        <!-- Footer -->
+
         <footer class="snap-section bg-surface dark:bg-dark-bg text-on-surface dark:text-dark-text py-10 px-6 md:px-12 lg:px-16 border-t fine-border-t transition-colors relative z-10">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="font-serif text-lg tracking-[0.15em] font-light">
                     S.O.I.A. <span class="text-brass italic">Consulting</span>
                 </div>
 
-                <p class="font-mono text-[10px] tracking-widest text-on-surface-variant/50 dark:text-surface/40 uppercase text-center transition-colors">
+                <p class="font-mono text-[10px] tracking-widest text-on-surface-variant/70 dark:text-dark-text-muted uppercase text-center transition-colors">
                     © 2026 Strategic Intelligence & Applied AI. All rights reserved.
                 </p>
 
                 <div class="flex items-center gap-8">
-                    <a href="javascript:void(0)" class="font-mono text-[10px] tracking-widest text-on-surface-variant/50 dark:text-surface/40 hover:text-brass dark:hover:text-brass uppercase transition-colors" data-i18n="foot_privacy">Privacy</a>
-                    <a href="javascript:void(0)" class="font-mono text-[10px] tracking-widest text-on-surface-variant/50 dark:text-surface/40 hover:text-brass dark:hover:text-brass uppercase transition-colors" data-i18n="foot_terms">Terms</a>
+                    <a href="javascript:void(0)" class="font-mono text-[10px] tracking-widest text-on-surface-variant/70 dark:text-dark-text-muted hover:text-primary dark:hover:text-brass uppercase transition-colors" data-i18n="foot_privacy">Privacy</a>
+                    <a href="javascript:void(0)" class="font-mono text-[10px] tracking-widest text-on-surface-variant/70 dark:text-dark-text-muted hover:text-primary dark:hover:text-brass uppercase transition-colors" data-i18n="foot_terms">Terms</a>
 
-                    <!-- Social Icons -->
-                    <div class="flex gap-5 ml-4 border-l border-outline-variant/30 dark:border-surface/10 pl-6 transition-colors">
-                        <a href="javascript:void(0)" class="text-on-surface-variant/50 dark:text-surface/40 hover:text-[#0a66c2] dark:hover:text-[#0a66c2] transition-colors" aria-label="LinkedIn">
+                    <div class="flex gap-5 ml-4 border-l border-outline-variant/30 dark:border-dark-border pl-6 transition-colors">
+                        <a href="INSERISCI_QUI_IL_LINK_LINKEDIN" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant/60 dark:text-dark-text-muted hover:text-[#0a66c2] dark:hover:text-[#0a66c2] transition-colors" aria-label="LinkedIn">
                             <svg class="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
                                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                             </svg>
                         </a>
-                        <a href="javascript:void(0)" class="text-on-surface-variant/50 dark:text-surface/40 hover:text-black dark:hover:text-white transition-colors" aria-label="TikTok">
+                        <a href="INSERISCI_QUI_IL_LINK_INSTAGRAM" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant/60 dark:text-dark-text-muted hover:text-[#E1306C] dark:hover:text-[#E1306C] transition-colors" aria-label="Instagram">
+                            <svg class="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="INSERISCI_QUI_IL_LINK_YOUTUBE" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant/60 dark:text-dark-text-muted hover:text-[#FF0000] dark:hover:text-[#FF0000] transition-colors" aria-label="YouTube">
+                            <svg class="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="INSERISCI_QUI_IL_LINK_TIKTOK" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant/60 dark:text-dark-text-muted hover:text-[#000000] dark:hover:text-[#ffffff] transition-colors" aria-label="TikTok">
                             <svg class="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
                                 <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.12-3.44-3.17-3.64-5.41-.09-1.07.05-2.16.49-3.14.46-1.05 1.18-1.96 2.1-2.6 1.4-1.04 3.24-1.41 4.94-1.01v4.06c-.88-.13-1.8.07-2.48.66-.63.53-1.03 1.34-1.02 2.18.01 1.05.69 2.05 1.68 2.37 1.14.38 2.44.02 3.22-.88.6-.68.96-1.57.96-2.47.01-6.62 0-13.23.01-19.85z"/>
                             </svg>
@@ -648,7 +662,6 @@
 
     </main>
 
-    <!-- Scripts -->
     <script>
         // --- 0. Theme Initialization & Toggle ---
         if (localStorage.theme === 'dark') {
@@ -676,7 +689,6 @@
                 localStorage.theme = 'dark';
             }
             updateThemeIcon();
-            // Senza refresh le formule scure restano biancastre, eleganti
         }
 
         document.getElementById('themeToggle').addEventListener('click', toggleTheme);
@@ -687,34 +699,24 @@
                 nav_approach: "Approach", nav_services: "Services", nav_manifesto: "Manifesto", nav_contact: "Engage",
                 hero_label: "Strategic Intelligence · Applied AI",
                 hero_title: 'Solutions that<br><em class="italic text-primary dark:text-dark-primary">truly solve.</em>',
-                hero_sub: "We don't implement technology for the sake of it. We design strategic intelligence architectures that amplify decision-making capabilities, optimize complex processes, and generate measurable impact.",
                 hero_cta1: "Contact Us", hero_cta2: 'Discover the Method <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>',
-
-                // Stats
                 stat_1: "Projects", stat_2: "Avg ROI", stat_3: "Companies", stat_4: "Experience",
-
                 approach_title: "Approach",
-                app_1_t: "Diagnosis", app_1_d: "Structural analysis of bottlenecks and mapping of decision-making flows. No off-the-shelf solutions.",
-                app_2_t: "Design", app_2_d: "Architectural design of the AI ecosystem. Rigorous calculation of expected ROI before writing a single line of code.",
-                app_3_t: "Implementation", app_3_d: "Iterative development, integration with legacy systems, and incremental deployment to minimize organizational friction.",
-                app_4_t: "Transfer", app_4_d: "Knowledge transfer. The client must own the system, not be dependent on it for life.",
-
+                app_1_t: "Diagnosis", app_1_d: "Structural analysis of bottlenecks and mapping of decision-making flows.",
+                app_2_t: "Design", app_2_d: "Architectural design of the AI ecosystem. Rigorous calculation of expected ROI.",
+                app_3_t: "Implementation", app_3_d: "Iterative development, integration with legacy systems, and incremental deployment.",
+                app_4_t: "Transfer", app_4_d: "Knowledge transfer. The client must own the system, not be dependent on it.",
                 services_title: "Services",
                 srv_1_t: "Process Automation", srv_1_d: "Identification and automation of high-volume repetitive tasks through agentic LLMs and RPA. We free human capital for high cognitive value activities.",
                 srv_2_t: "Data-Driven Decisions", srv_2_d: "Data intelligence infrastructures that transform disaggregated data into real-time actionable insights for the C-Level.",
                 srv_3_t: "AI Strategy & Governance", srv_3_d: "Alignment of technological investments with business objectives. Definition of ethical and operational policies for AI adoption in the company.",
-
                 man_label: "Our Vision",
                 man_title: '"AI should make people<br><em class="text-brass italic">more capable</em>,<br>not dependent."',
                 man_desc: "We believe the best technology is the invisible one. The one that disappears into the efficiency of an organization that works better, and a team that operates with ultimate clarity.",
-
                 tech_label: "Tech Ecosystem",
                 tech_disclaimer: "* All trademarks belong to their respective owners. Descriptive use only.",
-
                 contact_title: "A problem to solve?",
                 contact_desc: "Fill out the form to request a preliminary audit. We carefully select projects to ensure the highest level of analytical rigor and measurable results.",
-
-                // Form
                 form_name: "Full Name", ph_name: "e.g. John Doe",
                 form_company: "Company", ph_company: "e.g. Acme Corp",
                 form_role: "Role", ph_role: "e.g. CTO",
@@ -724,45 +726,31 @@
                 need_1: "Process Automation", need_2: "Data Analytics & Prediction", need_3: "AI Strategy", need_4: "Other",
                 form_message: "Details", ph_message: "Briefly describe...",
                 form_btn: "Transmit Request",
-
                 foot_privacy: "Privacy", foot_terms: "Terms",
-
-                // Ticker Strings
                 tick_sys: "SYS_TRAIN", tick_stat: "OPTIMIZING"
             },
             it: {
                 nav_approach: "Approccio", nav_services: "Servizi", nav_manifesto: "Visione", nav_contact: "Inizia",
                 hero_label: "Consulenza Strategica · IA Applicata",
                 hero_title: 'Soluzioni che<br><em class="italic text-primary dark:text-dark-primary">risolvono davvero.</em>',
-                hero_sub: "Non implementiamo tecnologia per il gusto di farlo. Partiamo dal problema, costruiamo architetture intelligenti e misuriamo l'impatto sui processi complessi.",
                 hero_cta1: "Contattaci", hero_cta2: 'Scopri il Metodo <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>',
-
-                // Stats
                 stat_1: "Progetti", stat_2: "ROI Medio", stat_3: "Aziende", stat_4: "Anni Esp.",
-
                 approach_title: "Approccio",
-                app_1_t: "Diagnosi", app_1_d: "Analisi strutturale dei colli di bottiglia e mappatura dei flussi decisionali. Nessuna soluzione standard.",
-                app_2_t: "Progettazione", app_2_d: "Design architetturale dell'ecosistema AI. Calcolo rigoroso del ROI atteso prima di scrivere una singola riga di codice.",
-                app_3_t: "Implementazione", app_3_d: "Sviluppo iterativo, integrazione con sistemi legacy e deployment incrementale per minimizzare l'attrito organizzativo.",
-                app_4_t: "Trasferimento", app_4_d: "Passaggio di know-how. Il cliente deve possedere il sistema, non esserne dipendente a vita.",
-
+                app_1_t: "Diagnosi", app_1_d: "Analisi strutturale dei colli di bottiglia e mappatura dei flussi decisionali.",
+                app_2_t: "Progettazione", app_2_d: "Design architetturale dell'ecosistema AI. Calcolo rigoroso del ROI atteso.",
+                app_3_t: "Implementazione", app_3_d: "Sviluppo iterativo, integrazione con sistemi legacy e deployment incrementale.",
+                app_4_t: "Trasferimento", app_4_d: "Passaggio di know-how. Il cliente deve possedere il sistema, non esserne dipendente.",
                 services_title: "Servizi",
-                srv_1_t: "Automazione Processi", srv_1_d: "Identifichiamo i colli di bottiglia operativi e progettiamo flussi intelligenti che eliminano il lavoro ripetitivo ad alto costo e basso valore.",
-                srv_2_t: "Decisioni Data-Driven", srv_2_d: "Costruiamo infrastrutture analitiche e modelli predittivi che trasformano i vostri dati esistenti in un vantaggio competitivo concreto.",
-                srv_3_t: "AI Strategy & Governance", srv_3_d: "Aiutiamo i board a definire una roadmap IA credibile, sostenibile e allineata ai valori aziendali, con attenzione al rischio.",
-
+                srv_1_t: "Automazione Processi", srv_1_d: "Identifichiamo i colli di bottiglia operativi e progettiamo flussi intelligenti che eliminano il lavoro ripetitivo.",
+                srv_2_t: "Decisioni Data-Driven", srv_2_d: "Costruiamo infrastrutture analitiche e modelli predittivi che trasformano i vostri dati in un vantaggio competitivo.",
+                srv_3_t: "AI Strategy & Governance", srv_3_d: "Aiutiamo i board a definire una roadmap IA credibile, sostenibile e allineata ai valori aziendali.",
                 man_label: "La Nostra Visione",
                 man_title: '"L\'IA dovrebbe rendere le persone<br><em class="text-brass italic">più capaci</em>,<br>non dipendenti."',
-                man_desc: "Crediamo che la tecnologia migliore sia quella che non si vede. Quella che scompare nell'efficienza di un'organizzazione che funziona meglio, di un team che lavora con più chiarezza.",
-
+                man_desc: "Crediamo che la tecnologia migliore sia quella che non si vede. Quella che scompare nell'efficienza di un'organizzazione che funziona meglio.",
                 tech_label: "Ecosistema Tecnologico",
                 tech_disclaimer: "* Tutti i marchi appartengono ai rispettivi titolari. Uso descrittivo.",
-
-                // Corretto: Identico in entrambe le lingue
                 contact_title: "Un problema da risolvere?",
-                contact_desc: "Compila il form per richiedere un audit preliminare. Selezioniamo con cura i progetti per garantire il massimo livello di rigore analitico e risultati misurabili.",
-
-                // Form
+                contact_desc: "Compila il form per richiedere un audit preliminare. Selezioniamo con cura i progetti per garantire il massimo livello di rigore analitico.",
                 form_name: "Nome Completo", ph_name: "es. Marco Rossi",
                 form_company: "Azienda", ph_company: "es. Acme Srl",
                 form_role: "Ruolo", ph_role: "es. CTO",
@@ -772,10 +760,7 @@
                 need_1: "Automazione Processi", need_2: "Analisi Dati e Predizioni", need_3: "Strategia IA", need_4: "Altro",
                 form_message: "Dettagli", ph_message: "Descrivi liberamente...",
                 form_btn: "Invia Richiesta",
-
                 foot_privacy: "Privacy", foot_terms: "Termini",
-
-                // Ticker Strings
                 tick_sys: "SYS_ADDEST", tick_stat: "IN OTTIMIZZAZIONE"
             }
         };
@@ -785,7 +770,6 @@
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'it' : 'en';
 
-            // Aggiorna testi
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (dictionary[currentLang][key]) {
@@ -793,7 +777,6 @@
                 }
             });
 
-            // Aggiorna placeholder
             document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
                 const key = el.getAttribute('data-i18n-placeholder');
                 if (dictionary[currentLang][key]) {
@@ -866,13 +849,14 @@
         }
         requestAnimationFrame(updateWatch);
 
-        // --- 4. Math Canvas (Formule fluttuanti DIETRO l'orologio) ---
+        // --- 4. Math Canvas (Formule fluttuanti) ---
         const mc = document.getElementById('math-canvas');
         const mctx = mc.getContext('2d');
         const mathSymbols =[
             'σ(z)=1/(1+e⁻ᶻ)', '∇L(θ)', 'argmin', '𝔼[X]', '∂L/∂w', 'P(y|x)', 'Σᵢ wᵢxᵢ', 'tanh(x)',
             'f(x)=Wx+b', 'KL(P‖Q)', 'ε=0.001', 'λ‖θ‖²', 'softmax', 'attention', 'transformer',
-            '1,1,2,3,5,8', 'π≈3.14', 'e≈2.71', 'φ=(1+√5)/2', 'O(n log n)'
+            '1,1,2,3,5,8', 'π≈3.14', 'e≈2.71', 'φ=(1+√5)/2', 'O(n log n)', 'ReLU(z)', 'batch_norm',
+            'AdamW', 'cross_entropy', 'ŷ = σ(Wx+b)'
         ];
         let particles =[];
 
@@ -881,15 +865,37 @@
             mc.height = mc.offsetHeight * window.devicePixelRatio;
             mctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
-            particles = mathSymbols.map(sym => ({
-                text: sym,
-                x: Math.random() * mc.offsetWidth,
-                y: Math.random() * mc.offsetHeight,
-                vx: (Math.random() - .5) * 0.4,
-                vy: (Math.random() - .5) * 0.4,
-                size: Math.random() * 4 + 10,
-                opacity: Math.random() * 0.4 + 0.3
-            }));
+            const baseWidth = mc.offsetWidth;
+            const baseHeight = mc.offsetHeight;
+
+            // Definisco una griglia per distribuzione uniforme
+            const cols = window.innerWidth < 768 ? 4 : 8;
+            const rows = window.innerWidth < 768 ? 5 : 6;
+            const cellW = baseWidth / cols;
+            const cellH = baseHeight / rows;
+
+            particles = [];
+            // Raddoppio le formule (2 per cella) per densità
+            for(let i=0; i<cols; i++) {
+                for(let j=0; j<rows; j++) {
+                    for(let k=0; k<2; k++) {
+                        const sym = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+                        // Posizione base cella + jitter casuale entro la cella
+                        const jitterX = (Math.random() - 0.5) * cellW * 0.8;
+                        const jitterY = (Math.random() - 0.5) * cellH * 0.8;
+
+                        particles.push({
+                            text: sym,
+                            x: (i * cellW) + (cellW/2) + jitterX,
+                            y: (j * cellH) + (cellH/2) + jitterY,
+                            vx: (Math.random() - .5) * 0.25, // Movimento molto lento
+                            vy: (Math.random() - .5) * 0.25,
+                            size: Math.random() * 3 + 11,
+                            opacity: Math.random() * 0.3 + 0.2 // Opacità ridotta per non disturbare
+                        });
+                    }
+                }
+            }
         }
 
         function animateMath() {
@@ -897,19 +903,22 @@
 
             particles.forEach(p => {
                 p.x += p.vx; p.y += p.vy;
-                if (p.x < -100) p.x = mc.offsetWidth + 50;
-                if (p.x > mc.offsetWidth + 100) p.x = -50;
-                if (p.y < -20) p.y = mc.offsetHeight + 10;
-                if (p.y > mc.offsetHeight + 20) p.y = -10;
-                mctx.font = `${p.size}px 'Space Grotesk', monospace`;
 
-                mctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * 0.6})`;
+                // Wrap-around bordi con offset per testo lungo
+                if (p.x < -150) p.x = mc.offsetWidth + 100;
+                if (p.x > mc.offsetWidth + 150) p.x = -100;
+                if (p.y < -50) p.y = mc.offsetHeight + 50;
+                if (p.y > mc.offsetHeight + 50) p.y = -50;
+
+                mctx.font = `${p.size}px 'Space Grotesk', monospace`;
+                // Colore Pietra sfocata
+                mctx.fillStyle = `rgba(245, 244, 240, ${p.opacity * 0.7})`;
                 mctx.fillText(p.text, p.x, p.y);
             });
             requestAnimationFrame(animateMath);
         }
 
-        // --- 5. Rete Neurale Animata (Manifesto Section) ---
+        // --- 5. Rete Neurale Animata ---
         const neuralCanvas = document.getElementById('neural-canvas');
         const nCtx = neuralCanvas.getContext('2d');
         let netParticles =[];
@@ -921,7 +930,7 @@
             nCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
             netParticles =[];
-            const numParticles = window.innerWidth < 768 ? 15 : 70;   // ← slightly reduced for mobile performance
+            const numParticles = window.innerWidth < 768 ? 15 : 70;
             for(let i=0; i<numParticles; i++) {
                 netParticles.push({
                     x: Math.random() * neuralCanvas.offsetWidth,
@@ -999,23 +1008,12 @@
         function cloneLogos() {
             const track = document.getElementById("logo-track");
             if(track) {
-                const originalContent = Array.from(track.children); // Cattura tutti i figli originali
-
-                // Rimuovi tutti i figli esistenti
+                const originalContent = Array.from(track.children);
                 while (track.firstChild) {
                     track.removeChild(track.firstChild);
                 }
-
-                // Duplica i figli originali una volta
-                originalContent.forEach(child => {
-                    track.appendChild(child.cloneNode(true));
-                });
-
-                // Duplica di nuovo tutti i figli (originali + prima copia)
-                // Questo crea l'effetto di loop continuo senza mostrare il reset
-                originalContent.forEach(child => {
-                    track.appendChild(child.cloneNode(true));
-                });
+                originalContent.forEach(child => track.appendChild(child.cloneNode(true)));
+                originalContent.forEach(child => track.appendChild(child.cloneNode(true)));
             }
         }
 
@@ -1033,25 +1031,20 @@
             cloneLogos();
         });
 
-        // --- 8. Gestione Invio Google Forms (Sicuro & Fixato) ---
+        // --- 8. Gestione Invio Google Forms ---
         const contactForm = document.getElementById('contactForm');
         const submitBtn = contactForm.querySelector('button[type="submit"]');
 
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-
-            // Salviamo il testo originale una sola volta
             const originalText = submitBtn.innerText;
 
-            // 0. CONTROLLO ANTI-SPAM (Honeypot)
             const honeypot = document.getElementById('bot-check').value;
             if (honeypot !== "") {
-                console.warn("Spam bot rilevato e bloccato.");
                 showSuccessMessage(originalText);
                 return;
             }
 
-            // 0. CONTROLLO ANTI-FLOOD
             const lastSubmitTime = localStorage.getItem('soia_last_submit');
             if (lastSubmitTime && (Date.now() - parseInt(lastSubmitTime)) < 60000) {
                 submitBtn.innerText = currentLang === 'it' ? 'Attendi 1 minuto prima di riprovare' : 'Please wait 1 min before retrying';
@@ -1060,10 +1053,7 @@
                 return;
             }
 
-            // 1. URL DI DESTINAZIONE
             const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScdFGTu05N1hH9-x-Ig3rg7K1lbgu8eZEFnSJ_FobChusjSLQ/formResponse';
-
-            // 2. CODICI ENTRY REALI
             const formEntries = {
                 name: 'entry.1872588949',
                 company: 'entry.2117268565',
@@ -1074,7 +1064,6 @@
                 message: 'entry.652878835'
             };
 
-            // USA URLSearchParams INVECE DI FORMDATA
             const formData = new URLSearchParams();
             formData.append(formEntries.name, document.getElementById('name').value);
             formData.append(formEntries.company, document.getElementById('company').value);
@@ -1084,24 +1073,19 @@
             formData.append(formEntries.need, document.getElementById('need').value || '');
             formData.append(formEntries.message, document.getElementById('message').value);
 
-            // Cambia stato bottone: In caricamento
             submitBtn.innerText = currentLang === 'it' ? 'Invio in corso...' : 'Transmitting...';
             submitBtn.disabled = true;
             submitBtn.style.opacity = '0.7';
 
-            // INVIO A GOOGLE FORMS FORMATTATO CORRETTAMENTE
             fetch(GOOGLE_FORM_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded' // FONDAMENTALE
-                },
-                body: formData.toString() // CONVERTI in STRINGA
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
             }).then(() => {
                 localStorage.setItem('soia_last_submit', Date.now().toString());
                 showSuccessMessage(originalText);
             }).catch(error => {
-                console.error('Errore invio:', error);
                 submitBtn.innerText = currentLang === 'it' ? 'Errore. Riprova.' : 'Error. Retry.';
                 submitBtn.style.backgroundColor = '#ff5f56';
                 setTimeout(() => resetBtn(originalText), 4000);
@@ -1110,9 +1094,8 @@
 
         function showSuccessMessage(originalText) {
             submitBtn.innerText = currentLang === 'it' ? 'Richiesta Trasmessa' : 'Request Transmitted';
-            submitBtn.style.backgroundColor = '#2e543b';
+            submitBtn.style.backgroundColor = '#163322'; // Verdone
             contactForm.reset();
-
             setTimeout(() => resetBtn(originalText), 4000);
         }
 
